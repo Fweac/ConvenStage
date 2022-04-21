@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('admin')->default(false);
+            $table->unsignedBigInteger('role_id')->default(3);
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 

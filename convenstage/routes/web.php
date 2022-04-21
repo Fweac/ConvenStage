@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route présentes par défaut dans l'application
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/foo', '\App\Http\Controllers\TestController@foo');
-Route::get('/bar', '\App\Http\Controllers\TestController@bar');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+
+// Route pour les admins
+Route::get('/roles', [RolesController::class, 'index'])->name('roles.index');
+Route::post('/roles/', [RolesController::class, 'show'])->name('roles.show');
+
+
+// Route pour les users
+
+
+
+// Route pour les profs
+
+
+
+// Route de Test
+Route::get('/foo', '\App\Http\Controllers\TestController@foo');
+Route::get('/bar', '\App\Http\Controllers\TestController@bar');
+
