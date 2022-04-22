@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +28,9 @@ require __DIR__.'/auth.php';
 
 
 // Route pour les admins
-Route::get('/roles', [RolesController::class, 'index'])->name('roles.index');
-Route::post('/roles/', [RolesController::class, 'show'])->name('roles.show');
-
+Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
 // Route pour les users
 
