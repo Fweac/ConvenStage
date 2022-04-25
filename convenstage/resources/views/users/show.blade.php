@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>{{ $user->name }}</title>
-</head>
-<body>
+@extends('layouts.template')
+@section('content')
     <h1>{{ $user->name }}</h1>
     <p>{{ $user->email }}</p>
     @switch($user->role)
@@ -38,5 +33,4 @@
         @default
             <p>Inconnu</p>
     @endswitch
-</body>
-</html>
+@endsection

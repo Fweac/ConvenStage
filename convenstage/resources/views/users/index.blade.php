@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>Users list</title>
-</head>
-<body>
+@extends('layouts.template')
+@section('content')
 <h1>Users list</h1>
-<a href="{{ route('dashboard') }}">dashnoard</a>
 <ul>
     <hr>
     @foreach($users as $user)
@@ -16,5 +10,4 @@
         <hr>
     @endforeach
 </ul>
-</body>
-</html>
+@endsection

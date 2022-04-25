@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 // Route présentes par défaut dans l'application
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('board');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
