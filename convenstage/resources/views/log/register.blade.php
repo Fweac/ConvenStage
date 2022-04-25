@@ -6,25 +6,51 @@
 </head>
 <body>
 @if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @if($errors->has('name') || $errors->has('email') || $errors->has('password') || $errors->has('password_confirmation'))
+    @else
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endif
 
 <form method="POST" action="{{ route('register') }}">
 @csrf
+    @if($errors->has('name'))
+        <div class="alert alert-danger">
+            @foreach($errors->get('name') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+    @endif
 <div class="form-group">
     <label for="name">Nom</label>
     <input type="text" class="form-control" id="name" name="name" placeholder="Nom">
 </div>
+
+    @if($errors->has('email'))
+        <div class="alert alert-danger">
+            @foreach($errors->get('email') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+    @endif
 <div class="form-group">
     <label for="email">Email</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 </div>
+
+    @if($errors->has('password'))
+        <div class="alert alert-danger">
+            @foreach($errors->get('password') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+    @endif
 <div class="form-group">
     <label for="password">Mot de passe</label>
     <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
