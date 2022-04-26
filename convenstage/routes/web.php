@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/home', 'home')->middleware('auth');
+Route::view('/home', 'home')->middleware('auth')->name('home');
 
 
-Route::get('/user', [UsersController::class, 'index'])->name('user.index');
+Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show');
+Route::post('/users/{id}', [UsersController::class, 'update'])->name('users.update');

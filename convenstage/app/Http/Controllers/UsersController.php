@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +21,9 @@ class UsersController extends Controller
      */
     public function index()
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Accès non autorisé");
+        }
         $users = User::all();
         return view('users.index', compact('users'));
     }
@@ -46,7 +57,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -69,7 +81,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect()->route('users.index')->with('success', 'Utilisateur mis à jour');
     }
 
     /**
