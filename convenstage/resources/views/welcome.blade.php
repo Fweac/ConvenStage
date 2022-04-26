@@ -1,13 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div class="img-fluid">
-                    <img src="{{ asset('Bootstrap_logo.png') }}" width="100%">
-                </div>
+<div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-2 mt-3 mb-3">
+                <img src="{{ asset('Bootstrap_logo.png') }}" width="100%">
             </div>
-            <div class="col-md-7">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
                         <h3>Bienvenue sur ConvenStage</h3>
