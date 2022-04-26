@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,33 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route présentes par défaut dans l'application
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('board');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
+Route::view('/home', 'home')->middleware('auth');
 
 
-
-// Route pour les admins
-Route::get('/users', [UserController::class, 'index'])->name('users');
-Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
-Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
-
-// Route pour les users
-
-
-
-// Route pour les profs
-
-
-
-// Route de Test
-Route::get('/foo', '\App\Http\Controllers\TestController@foo');
-Route::get('/bar', '\App\Http\Controllers\TestController@bar');
-
+Route::get('/user', [UsersController::class, 'index'])->name('user.index');

@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +13,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(!Gate::allows('isAdmin')){
-            abort(403,"Accés non autorisé");
-        }
         $users = User::all();
         return view('users.index', compact('users'));
     }
@@ -56,11 +46,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if(!Gate::allows('isAdmin')){
-            abort(403,"Accés non autorisé");
-        }
-        $user = User::findorfail($id);
-        return view('users.show', compact('user'));
+        //
     }
 
     /**
@@ -83,12 +69,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(!Gate::allows('isAdmin')){
-            abort(403,"Accés non autorisé");
-        }
-        $user = User::findorfail($id);
-        $user->update($request->all());
-        return redirect()->route('users.show', $user->id);
+        //
     }
 
     /**
