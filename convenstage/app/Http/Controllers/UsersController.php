@@ -57,6 +57,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Accès non autorisé");
+        }
         $user = User::findOrFail($id);
         return view('users.show', compact('user'));
     }
@@ -81,6 +84,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Accès non autorisé");
+        }
         $user = User::findOrFail($id);
         $user->update($request->all());
         return redirect()->route('users.index')->with('success', 'Utilisateur mis à jour');
