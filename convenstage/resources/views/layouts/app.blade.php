@@ -58,12 +58,21 @@
                             <a class="nav-link" href="{{ route('users.index') }}">{{ __('Admin') }}</a>
                         </li>
                     @endif
+                    @if(!(Auth::user()->role == 'eleve'))
+                        <li  class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Gestion de suivis') }}</a>
+                        </li>
+                    @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Suivis') }}</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('home') }}">{{ __('Mon espace') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
