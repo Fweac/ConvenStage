@@ -12,7 +12,7 @@ class SuivisController extends Controller
 {
     public function index()
     {
-        if(!Gate::allows('isAdmin') && !Gate::allows('isResponsable')){
+        if(Gate::allows('isEleve')){
             abort(403,"Accès non autorisé");
         }
         $suivis = Suivis::all();

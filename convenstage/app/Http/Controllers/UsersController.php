@@ -89,7 +89,7 @@ class UsersController extends Controller
         }
         $user = User::findOrFail($id);
         $user->update($request->all());
-        return redirect()->route('users.index')->with('success', 'Utilisateur mis à jour');
+        return redirect()->route('users')->with('success', 'Utilisateur mis à jour');
     }
 
     /**
