@@ -17,4 +17,5 @@ class Suivis extends Model
     {
         return $this->hasMany(Tache::class);
     }
+
 }
