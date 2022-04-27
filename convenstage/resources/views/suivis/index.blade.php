@@ -10,7 +10,7 @@
                     @foreach($suivis as $suivi)
                         <tr>
                             <td>
-                                <a href="{{ route('suivis.show', $suivi->id) }}">{{ $users->find($suivi->user_id)->name }}</a>
+                                <a href="{{ route('suivis.show', $suivi->user_id) }}">{{ $users->find($suivi->user_id)->name }}</a>
                                 @foreach($taches->where('suivis_id', $suivi->id) as $tache)
                                     @if($tache->etat == 0)
                                         <span class="alert alert-danger"></span>

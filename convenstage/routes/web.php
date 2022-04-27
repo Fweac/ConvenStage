@@ -22,8 +22,8 @@ Route::view('/home', 'home')->middleware('auth')->name('home');
 
 // Route pour gérer les utilisateurs
 Route::get('/users', [UsersController::class, 'index'])->name('users');
-Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show');
-Route::post('/users/{id}', [UsersController::class, 'update'])->name('users.update');
+Route::get('/users/{user_id}', [UsersController::class, 'show'])->name('users.show');
+Route::post('/users/{user_id}', [UsersController::class, 'update'])->name('users.update');
 
 // Route pour les suivis
 Route::get('/suivis', [SuivisController::class, 'index'])->name('suivis');

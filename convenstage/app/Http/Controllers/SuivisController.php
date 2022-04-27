@@ -6,11 +6,15 @@ use App\Models\Suivis;
 use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SuivisController extends Controller
 {
     public function index()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isResponsable')){
+            abort(403,"Accès non autorisé");
+        }
         $suivis = Suivis::all();
         $users = User::all();
         $taches = Tache::all();
@@ -32,11 +36,18 @@ class SuivisController extends Controller
         return redirect()->route('suivis.index');
     }
 
-    public function show($id)
+    public function show($user_id)
     {
-        $suivis = Suivis::find($id);
-        $taches = $suivis->taches;
-        return view('suivis.show', compact('suivis' , 'taches'));
+        if(count($suivis = Suivis::where('user_id', $user_id)->get()) > 0)
+        {
+            $suivis = $suivis[0];
+            $taches = $suivis->taches;
+            return view('suivis.show', compact('suivis' , 'taches'));
+        }
+        else
+        {
+            return view('suivis.empty');
+        }
     }
 
     public function edit(Suivis $suivis)

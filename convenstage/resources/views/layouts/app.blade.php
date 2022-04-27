@@ -60,11 +60,11 @@
                     @endif
                     @if(!(Auth::user()->role == 'eleve'))
                         <li  class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Gestion de suivis') }}</a>
+                            <a class="nav-link" href="{{ route('suivis') }}">{{ __('Gestion de suivis') }}</a>
                         </li>
                     @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('suivis') }}">{{ __('Suivis') }}</a>
+                            <a class="nav-link" href="{{ route('suivis.show', Auth::user()->id) }}">{{ __('Suivis') }}</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
