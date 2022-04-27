@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Suivis;
+use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,9 @@ class SuivisController extends Controller
     public function index()
     {
         $suivis = Suivis::all();
-        return view('suivis.index', compact('suivis'));
+        $users = User::all();
+        $taches = Tache::all();
+        return view('suivis.index', compact('suivis' , 'users' , 'taches'));
     }
 
     public function create()
@@ -32,7 +35,8 @@ class SuivisController extends Controller
     public function show($id)
     {
         $suivis = Suivis::find($id);
-        return view('suivis.show', compact('suivis'));
+        $taches = $suivis->taches;
+        return view('suivis.show', compact('suivis' , 'taches'));
     }
 
     public function edit(Suivis $suivis)

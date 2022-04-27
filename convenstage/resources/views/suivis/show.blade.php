@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="text-md-center">
-        {{ $suivis->id }}
+        @foreach($taches as $tache)
+            {{$tache->nom}}
+        @endforeach
     </div>
 @endsection
