@@ -32,7 +32,7 @@
                                                     <input type="radio" name="role" value="responsable"> Responsable
                                                     <input type="radio" name="role" value="tuteur"> Tuteur
                                                     <input type="radio" name="role" value="secretaire"> Secretaire
-                                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                                    <button type="submit" class="btn btn-success">Modifier</button>
                                                 </form>
                                             </td>
                                             @break

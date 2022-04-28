@@ -36,7 +36,7 @@
 
                                     <td>
                                         <form action="{{ route('users.show', $user->id) }}" method="get">
-                                            <button type="submit" class="btn btn-primary">Afficher</button>
+                                            <button type="submit" class="btn btn-info">Afficher</button>
                                         </form>
                                     </td>
                                 </tr>
