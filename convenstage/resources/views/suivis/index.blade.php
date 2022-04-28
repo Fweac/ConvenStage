@@ -39,7 +39,9 @@
                     @endforeach
                     <tr>
                         <td>
-                            <a href="{{ route('suivis.create') }}">Ajouter un suivi</a>
+                            <form action="{{ route('suivis.create') }}" method="GET">
+                                <button type="submit" class="btn btn-primary">Ajouter un suivi</button>
+                            </form>
                         </td>
                     </tr>
                 </table>

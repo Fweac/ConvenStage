@@ -31,9 +31,9 @@
                                     <td>{{ $user->email }}</td>
 
                                     <td>
-                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-default btn-xs">
-                                            <i class="fa fa-eye">Afficher</i>
-                                        </a>
+                                        <form action="{{ route('users.show', $user->id) }}" method="get">
+                                            <button type="submit" class="btn btn-primary">Afficher</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
