@@ -22,19 +22,13 @@
                             <input type="date" class="form-control" id="date_fin" name="date_fin">
                         </div>
                         <div class="form-group">
-                            <label for="statut">{{ __('État') }}</label>
-                            <select class="form-control" id="etat" name="etat">
-                                <option value="0">En cours</option>
-                                <option value="1">Terminé</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="type">{{ __('Type') }}</label>
                             <input type="text" class="form-control" id="type" name="type">
                         </div>
+                        <input type="hidden" name="etat" value="0">
                         <input type="hidden" name="user_id" value="{{ $user_id }}">
                         <input type="hidden" name="suivis_id" value="{{ $id }}">
-                        <input type=""hidden name="ordre" value="1">
+                        <input type=""hidden name="ordre" value="{{ $count+1 }}">
                         <button type="submit" class="btn btn-primary">{{ __('Ajouter') }}</button>
                     </form>
                 </div>

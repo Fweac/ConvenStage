@@ -36,16 +36,28 @@
                                 <td>{{ $tache->nom }}</td>
                                 <td>{{ $tache->description }}</td>
                                 <td>{{ $tache->date_fin }}</td>
-                                <td>{{ $tache->etat }}</td>
+                                <td>
+                                    @if($tache->etat == 0)
+                                        En cours
+                                    @else
+                                        Terminée
+                                    @endif
+                                </td>
                                 <td>
                                     @if(!(Auth::user()->role == 'eleve'))
                                         <a href="#" class="btn btn-info">{{ __('Voir') }}</a>
                                         <a href="#" class="btn btn-primary">{{ __('Modifier') }}</a>
-                                        {{--<form action="{{ route('taches.destroy', $tache->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit">{{ __('Supprimer') }}</button>
-                                        </form>--}}
+                                        </form>
+
+                                        <!-- Changement d'état -->
+                                        <form action="{{ route('taches.validate', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button class="btn btn-success" type="submit">{{ __('Valider') }}</button>
+                                        </form>
                                     @endif
                                 </td>
                             </tr>

@@ -12,7 +12,11 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped">
