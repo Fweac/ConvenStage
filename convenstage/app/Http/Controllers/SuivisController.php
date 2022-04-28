@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Gate;
 
 class SuivisController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if(Gate::allows('isEleve')){
@@ -29,11 +35,19 @@ class SuivisController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
+        $tests = Suivis::all();
+        foreach($tests as $test)
+        {
+            if($test->user_id == $request->user_id)
+            {
+                return redirect()->route('suivis.create')->with('error', 'Vous avez déjà un suivi pour cette élève');
+            }
+        }
         $suivis = new Suivis();
         $suivis->user_id = $request->user_id;
-        $suivis->suivi = $request->suivi;
         $suivis->save();
-        return redirect()->route('suivis.index');
+        return redirect()->route('suivis')->with('success', 'Suivis créé avec succès');
     }
 
     public function show($user_id)
@@ -41,8 +55,7 @@ class SuivisController extends Controller
         if(count($suivis = Suivis::where('user_id', $user_id)->get()) > 0)
         {
             $suivis = $suivis[0];
-            $taches = $suivis->taches;
-            return view('suivis.show', compact('suivis' , 'taches'));
+            return redirect()->route('taches', $suivis->id);
         }
         else
         {
@@ -61,12 +74,21 @@ class SuivisController extends Controller
         $suivis->user_id = $request->user_id;
         $suivis->suivi = $request->suivi;
         $suivis->save();
-        return redirect()->route('suivis.index');
+        return redirect()->route('suivis');
     }
 
-    public function destroy(Suivis $suivis)
+    public function destroy($id)
     {
+        $suivis = Suivis::find($id);
+        $taches = Tache::all();
+        foreach($taches as $tache)
+        {
+            if($tache->suivis_id == $suivis->id)
+            {
+                $tache->delete();
+            }
+        }
         $suivis->delete();
-        return redirect()->route('suivis.index');
+        return redirect()->route('suivis')->with('success', 'Suivi supprimé');
     }
 }

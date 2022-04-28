@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SuivisController;
+use App\Http\Controllers\TachesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,11 @@ Route::post('/users/{user_id}', [UsersController::class, 'update'])->name('users
 // Route pour les suivis
 Route::get('/suivis', [SuivisController::class, 'index'])->name('suivis');
 Route::get('/suivis/{id}', [SuivisController::class, 'show'])->name('suivis.show');
+Route::get('suivis-create', [SuivisController::class, 'create'])->name('suivis.create');
+Route::post('/suivis', [SuivisController::class, 'store'])->name('suivis.store');
+Route::delete('/suivis/{id}', [SuivisController::class, 'destroy'])->name('suivis.destroy');
+
+// Route pour les taches
+Route::get('/suivis/{id}/taches', [TachesController::class, 'index'])->name('taches');
+Route::get('/suivis/{id}/taches-create', [TachesController::class, 'create'])->name('taches.create');
+Route::post('/suivis/{id}/taches', [TachesController::class, 'store'])->name('taches.store');

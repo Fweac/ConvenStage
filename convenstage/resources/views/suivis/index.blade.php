@@ -4,6 +4,16 @@
         <div class="row">
             <div class="card-header">
                 <h4>Suivis</h4>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
             <div class="card-body">
                 <table>
@@ -18,10 +28,20 @@
                                         <span class="alert alert-success"></span>
                                     @endif
                                 @endforeach
+                                <form action="{{ route('suivis.destroy', $suivi->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
                                 <hr>
                             </td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td>
+                            <a href="{{ route('suivis.create') }}">Ajouter un suivi</a>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
