@@ -35,7 +35,9 @@ class SuivisController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
+        if(Gate::allows('isEleve')){
+            abort(403,"Accès non autorisé");
+        }
         $tests = Suivis::all();
         foreach($tests as $test)
         {
@@ -65,20 +67,19 @@ class SuivisController extends Controller
 
     public function edit(Suivis $suivis)
     {
-        $users = User::all();
-        return view('suivis.edit', compact('suivis', 'users'));
+        //
     }
 
     public function update(Request $request, Suivis $suivis)
     {
-        $suivis->user_id = $request->user_id;
-        $suivis->suivi = $request->suivi;
-        $suivis->save();
-        return redirect()->route('suivis');
+        //
     }
 
     public function destroy($id)
     {
+        if(Gate::allows('isEleve')){
+            abort(403,"Accès non autorisé");
+        }
         $suivis = Suivis::find($id);
         $taches = Tache::all();
         foreach($taches as $tache)

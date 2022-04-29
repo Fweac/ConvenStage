@@ -51,6 +51,13 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            <tr>
+                                <td colspan="3">
+                                    <form action="{{ route('suivis.create') }}" method="get">
+                                        <button type="submit" class="btn btn-primary">{{ __('Ajouter') }}</button>
+                                    </form>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

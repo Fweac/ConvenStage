@@ -14,7 +14,6 @@ class Tache extends Model
         'description',
         'date_fin',
         'etat',
-        'type',
         'ordre',
         'suivis_id',
         'user_id',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Suivis;
 use App\Models\Tache;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -37,11 +38,13 @@ class TachesController extends Controller
         {
             return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour créer une tâche');
         }
+
         $suivis = Suivis::find($id);
+        $user_id = $suivis->user_id;
         $taches = Tache::where('suivis_id', $id)->get();
         $count = count($taches);
-        $user_id = $suivis->user_id;
-        return view('taches.create', compact('id' , 'user_id' , 'count'));
+        $users = User::all();
+        return view('taches.create', compact('id' , 'users' , 'count', 'user_id'));
     }
 
     /**
@@ -56,6 +59,12 @@ class TachesController extends Controller
         {
             return redirect()->route('taches', $request->suivis_id)->with('error', 'Vous n\'avez pas les droits pour créer une tâche');
         }
+        $request->validate([
+            'nom' => 'required',
+            'date_fin' => 'required',
+            'description' => 'required',
+            'user_id' => 'required',
+        ]);
         $tache = new Tache();
         $tache->suivis_id = $request->suivis_id;
         $tache->user_id = $request->user_id;
@@ -64,7 +73,6 @@ class TachesController extends Controller
         $tache->date_fin = $request->date_fin;
         $tache->ordre = $request->ordre;
         $tache->etat = $request->etat;
-        $tache->type = $request->type;
         $tache->save();
         return redirect()->route('taches', $request->suivis_id)->with('success', 'Tache ajoutée avec succès');
     }
@@ -86,9 +94,17 @@ class TachesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $tache_id)
     {
-        //
+        if(Gate::allows('isEleve'))
+        {
+            return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour modifier une tâche');
+        }
+        $suivis = Suivis::find($id);
+        $user_id = $suivis->user_id;
+        $tache = Tache::find($tache_id);
+        $users = User::all();
+        return view('taches.edit', compact('tache' , 'id' , 'users' , 'user_id'));
     }
 
     /**
@@ -98,9 +114,27 @@ class TachesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id , $tache_id)
     {
-        //
+        if(Gate::allows('isEleve'))
+        {
+            return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour modifier une tâche');
+        }
+        $request->validate([
+            'nom' => 'required',
+            'date_fin' => 'required',
+            'description' => 'required',
+            'user_id' => 'required',
+        ]);
+        $tache = Tache::find($request->tache_id);
+        $tache->nom = $request->nom;
+        $tache->description = $request->description;
+        $tache->date_fin = $request->date_fin;
+        $tache->ordre = $request->ordre;
+        $tache->etat = $request->etat;
+        $tache->user_id = $request->user_id;
+        $tache->save();
+        return redirect()->route('taches', $id)->with('success', 'Tache modifiée avec succès');
     }
 
     public function updateEtat(Request $request, $id, $tache_id)
@@ -137,6 +171,10 @@ class TachesController extends Controller
      */
     public function destroy($id, $tache_id)
     {
+        if(Gate::allows('isEleve'))
+        {
+            return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour supprimer une tâche');
+        }
         $tache = Tache::find($tache_id);
         $suivis = Tache::where('suivis_id', $id)->get();
         $suivis = $suivis->where('ordre', '>', $tache->ordre);

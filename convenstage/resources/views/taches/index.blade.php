@@ -45,8 +45,13 @@
                                 </td>
                                 <td>
                                     @if(!(Auth::user()->role == 'eleve'))
-                                        <a href="#" class="btn btn-info">{{ __('Voir') }}</a>
-                                        <a href="#" class="btn btn-primary">{{ __('Modifier') }}</a>
+                                        @if(Auth::user()->id == $tache->user_id)
+                                            <a href="#" class="btn btn-info">{{ __('Remplir') }}</a>
+                                        @endif
+                                        <form action="{{ route('taches.edit', ['id' => $id, 'tache_id' => $tache->id]) }}" method="GET" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-warning">{{ __('Modifier') }}</button>
+                                        </form>
                                         <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')

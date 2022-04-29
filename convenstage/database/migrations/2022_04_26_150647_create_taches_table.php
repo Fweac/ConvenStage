@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('description');
             $table->boolean('etat');
-            $table->string('type');
-            $table->increments('ordre');
+            $table->bigInteger('ordre');
             $table->unsignedBigInteger('suivis_id');
             $table->foreign('suivis_id')->references('id')->on('suivis');
             $table->unsignedBigInteger('user_id');
