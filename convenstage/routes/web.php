@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConventionsController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\SuivisController;
 use App\Http\Controllers\TachesController;
 use App\Http\Controllers\UsersController;
@@ -47,3 +48,6 @@ Route::put('/suivis/{id}/taches/{tache_id}-e', [TachesController::class, 'update
 Route::get('/suivis/{id}/conventions', [ConventionsController::class, 'index'])->name('conventions');
 Route::get('/suivis/{id}/conventions-create', [ConventionsController::class, 'create'])->name('conventions.create');
 Route::post('/suivis/{id}/conventions', [ConventionsController::class, 'store'])->name('conventions.store');
+
+// Route pour les mails
+Route::get('/mails', [MailController::class, 'sendMail'])->name('mails.send');
