@@ -18,4 +18,9 @@ class Suivis extends Model
         return $this->hasMany(Tache::class);
     }
 
+    public function conventions()
+    {
+        return $this->hasMany(Convention::class);
+    }
+
 }

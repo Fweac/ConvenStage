@@ -46,7 +46,9 @@
                                 <td>
                                     @if(!(Auth::user()->role == 'eleve'))
                                         @if(Auth::user()->id == $tache->user_id)
-                                            <a href="#" class="btn btn-info">{{ __('Remplir') }}</a>
+                                            <form action="{{ route('conventions.create', $id) }}" method="GET" class="d-inline">
+                                                <button type="submit" class="btn btn-info">{{ __('Remplir') }}</button>
+                                            </form>
                                         @endif
                                         <form action="{{ route('taches.edit', ['id' => $id, 'tache_id' => $tache->id]) }}" method="GET" class="d-inline">
                                             @csrf

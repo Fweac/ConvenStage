@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConventionsController;
 use App\Http\Controllers\SuivisController;
 use App\Http\Controllers\TachesController;
 use App\Http\Controllers\UsersController;
@@ -41,3 +42,8 @@ Route::delete('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'destr
 Route::post('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'updateEtat'])->name('taches.validate');
 Route::get('/suivis/{id}/taches/{tache_id}/edit', [TachesController::class, 'edit'])->name('taches.edit');
 Route::put('/suivis/{id}/taches/{tache_id}-e', [TachesController::class, 'update'])->name('taches.update');
+
+// Route pour les conventions
+Route::get('/suivis/{id}/conventions', [ConventionsController::class, 'index'])->name('conventions');
+Route::get('/suivis/{id}/conventions-create', [ConventionsController::class, 'create'])->name('conventions.create');
+Route::post('/suivis/{id}/conventions', [ConventionsController::class, 'store'])->name('conventions.store');

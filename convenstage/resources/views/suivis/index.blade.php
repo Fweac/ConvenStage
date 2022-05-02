@@ -43,6 +43,9 @@
                                             <form action="{{ route('suivis.show', $suivi->user_id) }}" method="get" class="d-inline">
                                                 <button type="submit" class="btn btn-info">{{ __('Voir') }}</button>
                                             </form>
+                                            <form action="{{ route('conventions', $suivi->id) }}" method="GET" class="d-inline">
+                                                <button type="submit" class="btn btn-success">{{ __('Convention') }}</button>
+                                            </form>
                                             <form action="{{ route('suivis.destroy', $suivi->id) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')

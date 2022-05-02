@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Convention;
 use App\Models\Suivis;
 use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class SuivisController extends Controller
 {
@@ -87,6 +90,15 @@ class SuivisController extends Controller
             if($tache->suivis_id == $suivis->id)
             {
                 $tache->delete();
+            }
+        }
+        $conventions = Convention::all();
+        foreach($conventions as $convention)
+        {
+            if($convention->suivis_id == $suivis->id)
+            {
+                File::delete('storage/'.$convention->path);
+                $convention->delete();
             }
         }
         $suivis->delete();

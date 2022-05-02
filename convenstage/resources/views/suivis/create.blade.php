@@ -14,7 +14,7 @@
                             <label for="eleve" class="col-md-4 col-form-label text-md-right">{{ __('Eleve') }}</label>
 
                             <div class="col-md-6">
-                                <select id="user_id" class="form-control" name="user_id" required>
+                                <select id="user_id" class="form-control @error('user_id') is-invalid @enderror" name="user_id" required>
                                     <option value="">-- Selectionner un eleve --</option>
                                     @foreach($users as $user)
                                         @if($user->role == 'eleve')
@@ -22,6 +22,12 @@
                                         @endif
                                     @endforeach
                                 </select>
+
+                                @error('user_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary">

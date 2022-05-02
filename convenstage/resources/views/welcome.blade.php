@@ -3,7 +3,7 @@
 <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-2 mt-3 mb-3">
-                <img src="{{ asset('Bootstrap_logo.png') }}" width="100%">
+                <img src="{{ asset('storage/Bootstrap_logo.png') }}" width="100%">
             </div>
             <div class="col-md-10">
                 <div class="card">

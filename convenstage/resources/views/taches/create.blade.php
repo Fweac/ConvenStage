@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label for="user_id">{{ __('Invité') }}</label>
-                            <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
+                            <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id" required>
                                 <option value="" selected>-- Selectionner un invité --</option>
                                 @foreach($users as $user)
                                     @if($user_id == $user->id)
