@@ -50,4 +50,4 @@ Route::get('/suivis/{id}/conventions-create', [ConventionsController::class, 'cr
 Route::post('/suivis/{id}/conventions', [ConventionsController::class, 'store'])->name('conventions.store');
 
 // Route pour les mails
-Route::get('/mails', [MailController::class, 'sendMail'])->name('mails.send');
+Route::post('/suivis/{id}/taches-mails', [MailController::class, 'sendMail'])->name('mails.send');

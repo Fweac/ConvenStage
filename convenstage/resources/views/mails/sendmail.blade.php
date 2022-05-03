@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>beau mail</h1>
-    <p>mon beau mail</p>
+    <h1>Bonjour {{ $data['user']->name }}</h1>
+    <p>Vous n'avez toujours pas validé votre tache '{{ $data['tache']->nom }}'.</p>
+    <p>Veuillez cliquer sur le lien ci-dessous pour valider votre tache.</p>
+    <a href="{{ url('/suivis/'.$data['tache']->suivis_id.'/conventions-create') }}">Valider</a>
 </body>
 </html>

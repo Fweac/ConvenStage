@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendMail extends Mailable
+class MarkdownMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -34,6 +34,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@convenstage.fr')->subject('Validé votre convention')->view('mails.sendmail');
+        return $this->subject('Validé votre convention')->markdown('mails.markdown-sendmail');
     }
 }

@@ -40,7 +40,7 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <form action="{{ route('suivis.show', $suivi->user_id) }}" method="get" class="d-inline">
+                                            <form action="{{ route('suivis.show', $suivi->user_id) }}" method="GET" class="d-inline">
                                                 <button type="submit" class="btn btn-info">{{ __('Voir') }}</button>
                                             </form>
                                             <form action="{{ route('conventions', $suivi->id) }}" method="GET" class="d-inline">

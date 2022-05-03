@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     {{ __('Taches') }}
@@ -64,6 +64,12 @@
                                         <form action="{{ route('taches.validate', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             <button class="btn btn-success" type="submit">{{ __('Valider') }}</button>
+                                        </form>
+
+                                        <form action="{{ route('mails.send', $id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <input type="hidden" name="tache_id" value="{{ $tache->id }}">
+                                            <button type="submit" class="btn btn-warning">{{ __('Envoyer un mail') }}</button>
                                         </form>
                                     @endif
                                 </td>
