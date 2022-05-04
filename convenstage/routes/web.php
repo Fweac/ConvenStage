@@ -37,6 +37,7 @@ Route::delete('/suivis/{id}', [SuivisController::class, 'destroy'])->name('suivi
 
 // Route pour les taches
 Route::get('/suivis/{id}/taches', [TachesController::class, 'index'])->name('taches');
+Route::get('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'show'])->name('taches.show');
 Route::get('/suivis/{id}/taches-create', [TachesController::class, 'create'])->name('taches.create');
 Route::post('/suivis/{id}/taches', [TachesController::class, 'store'])->name('taches.store');
 Route::delete('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'destroy'])->name('taches.destroy');
@@ -47,7 +48,7 @@ Route::put('/suivis/{id}/taches/{tache_id}-e', [TachesController::class, 'update
 // Route pour les conventions
 Route::get('/suivis/{id}/conventions', [ConventionsController::class, 'index'])->name('conventions');
 Route::get('/suivis/{id}/conventions-create', [ConventionsController::class, 'create'])->name('conventions.create');
-Route::post('/suivis/{id}/conventions', [ConventionsController::class, 'store'])->name('conventions.store');
+Route::post('/suivis/{id}/taches/{tache_id}/upload', [ConventionsController::class, 'store'])->name('conventions.store');
 
 // Route pour les mails
 Route::post('/suivis/{id}/taches-mails', [MailController::class, 'sendMail'])->name('mails.send');

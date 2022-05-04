@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Suivis;
+use App\Models\Convention;
 use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +25,15 @@ class TachesController extends Controller
     public function index($id)
     {
         $taches = Tache::where('suivis_id', $id)->get();
-        return view('taches.index', compact('taches', 'id'));
+        $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
+        if(Convention::where('suivis_id', $id)->count() == 0)
+        {
+            return view('taches.index', compact('taches', 'id'));
+        }
+        else
+        {
+            return view('taches.index', compact('taches', 'id', 'convention'));
+        }
     }
 
     /**
@@ -83,9 +92,19 @@ class TachesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $tache_id)
     {
-        //
+        $taches = Tache::where('suivis_id', $id)->get();
+        $tacheA = Tache::find($tache_id);
+        $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
+        if(Convention::where('suivis_id', $id)->count() == 0)
+        {
+            return view('taches.show', compact('taches', 'id', 'tacheA'));
+        }
+        else
+        {
+            return view('taches.show', compact('taches', 'id', 'convention', 'tacheA'));
+        }
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Convention;
+use App\Models\Suivis;
 use Illuminate\Http\Request;
 
 class ConventionsController extends Controller
@@ -56,7 +57,7 @@ class ConventionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id, $tache_id)
     {
         $request->validate([
             'convention' => 'required',
@@ -80,11 +81,11 @@ class ConventionsController extends Controller
             $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . '.' . $request->convention->extension(), 'public');
             $convention->save();
 
-            return redirect()->route('conventions.create', $id)->with('success', 'La convention a bien été ajoutée.');
+            return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('success', 'La convention a bien été ajoutée.');
         }
         else
         {
-            return redirect()->route('conventions.create', $id)->with('error', 'Le fichier n\'est pas un PDF.');
+            return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('error', 'Le fichier n\'est pas un PDF.');
         }
     }
 
