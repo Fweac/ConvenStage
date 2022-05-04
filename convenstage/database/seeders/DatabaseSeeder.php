@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'a@a',
             'password' => bcrypt('a'),
             'role' => 'admin',
+            'email_verified_at' => now(),
         ]);
         User::factory(10)->create();
     }

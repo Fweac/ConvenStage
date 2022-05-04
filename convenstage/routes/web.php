@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/home', 'home')->middleware('auth')->name('home');
+Route::view('/profile', 'profile')->middleware('auth', 'verified')->name('home');
 
 // Route pour gérer les utilisateurs
 Route::get('/users', [UsersController::class, 'index'])->name('users');
