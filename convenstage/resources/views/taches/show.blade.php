@@ -21,34 +21,70 @@
             @foreach($taches as $tache)
                 @if($tache->etat == 1)
                     <div class="col border bg-success text-white">
-                        <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn-close btn-close-white" aria-label="Close" type="submit"></button>
-                        </form>
-                        <p>{{ $tache->nom }}</p>
-                        <p>{{ $tache->date_fin }}</p>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p>{{ $tache->nom }}</p>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                @if(!(Auth::user()->role == 'eleve'))
+                                    <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn-close btn-close-white" width="30%" aria-label="Close" type="submit"></button>
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{{ $tache->date_fin }}</p>
+                            </div>
+                        </div>
                     </div>
                 @else
                     @if($tache->date_fin > date('Y-m-d'))
-                        <div class="col border" @if(Auth::user()->id == $tache->user_id) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
-                            <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn-close" aria-label="Close" type="submit"></button>
-                            </form>
-                            <p>{{ $tache->nom }}</p>
-                            <p>{{ $tache->date_fin }}</p>
+                        <div class="col border @if(Auth::user()->id == $tache->user_id)border-warning @endif" @if(Auth::user()->id == $tache->user_id) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p>{{ $tache->nom }}</p>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    @if(!(Auth::user()->role == 'eleve'))
+                                        <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn-close" width="30%" aria-label="Close" type="submit"></button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>{{ $tache->date_fin }}</p>
+                                </div>
+                            </div>
                         </div>
                     @else
-                        <div class="col border bg-danger text-white" @if(Auth::user()->id == $tache->user_id) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
-                            <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn-close btn-close-white" aria-label="Close" type="submit"></button>
-                            </form>
-                            <p>{{ $tache->nom }}</p>
-                            <p>{{ $tache->date_fin }}</p>
+                        <div class="col border @if(Auth::user()->id == $tache->user_id)border-warning @endif bg-danger text-white" @if(Auth::user()->id == $tache->user_id) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p>{{ $tache->nom }}</p>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    @if(!(Auth::user()->role == 'eleve'))
+                                        <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn-close btn-close-white" width="30%" aria-label="Close" type="submit"></button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>{{ $tache->date_fin }}</p>
+                                </div>
+                            </div>
                         </div>
                     @endif
                 @endif
