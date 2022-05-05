@@ -33,7 +33,8 @@ class SuivisController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('suivis.create', compact('users'));
+        $suivis = Suivis::all();
+        return view('suivis.create', compact('users' , 'suivis'));
     }
 
     public function store(Request $request)
@@ -52,7 +53,7 @@ class SuivisController extends Controller
         $suivis = new Suivis();
         $suivis->user_id = $request->user_id;
         $suivis->save();
-        return redirect()->route('suivis')->with('success', 'Suivis créé avec succès');
+        return redirect()->route('taches.create', $suivis->id);
     }
 
     public function show($user_id)

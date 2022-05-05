@@ -26,13 +26,14 @@ class TachesController extends Controller
     {
         $taches = Tache::where('suivis_id', $id)->get();
         $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
+        $users = User::all();
         if(Convention::where('suivis_id', $id)->count() == 0)
         {
-            return view('taches.index', compact('taches', 'id'));
+            return view('taches.index', compact('taches', 'id', 'users'));
         }
         else
         {
-            return view('taches.index', compact('taches', 'id', 'convention'));
+            return view('taches.index', compact('taches', 'id', 'convention', 'users'));
         }
     }
 
@@ -53,7 +54,8 @@ class TachesController extends Controller
         $taches = Tache::where('suivis_id', $id)->get();
         $count = count($taches);
         $users = User::all();
-        return view('taches.create', compact('id' , 'users' , 'count', 'user_id'));
+        $suivis = Suivis::all();
+        return view('taches.create', compact('id' , 'users' , 'count', 'user_id', 'suivis', 'taches'));
     }
 
     /**
@@ -83,7 +85,7 @@ class TachesController extends Controller
         $tache->ordre = $request->ordre;
         $tache->etat = $request->etat;
         $tache->save();
-        return redirect()->route('taches', $request->suivis_id)->with('success', 'Tache ajoutée avec succès');
+        return redirect()->route('taches.create', $request->suivis_id)->with('success', 'Tâche ajoutée avec succès');
     }
 
     /**
@@ -97,13 +99,14 @@ class TachesController extends Controller
         $taches = Tache::where('suivis_id', $id)->get();
         $tacheA = Tache::find($tache_id);
         $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
+        $users = User::all();
         if(Convention::where('suivis_id', $id)->count() == 0)
         {
-            return view('taches.show', compact('taches', 'id', 'tacheA'));
+            return view('taches.show', compact('taches', 'id', 'tacheA', 'users'));
         }
         else
         {
-            return view('taches.show', compact('taches', 'id', 'convention', 'tacheA'));
+            return view('taches.show', compact('taches', 'id', 'convention', 'tacheA', 'users'));
         }
     }
 
@@ -121,9 +124,11 @@ class TachesController extends Controller
         }
         $suivis = Suivis::find($id);
         $user_id = $suivis->user_id;
-        $tache = Tache::find($tache_id);
+        $tacheA = Tache::find($tache_id);
         $users = User::all();
-        return view('taches.edit', compact('tache' , 'id' , 'users' , 'user_id'));
+        $suivis = Suivis::all();
+        $taches = Tache::where('suivis_id', $id)->get();
+        return view('taches.edit', compact('tacheA' , 'id' , 'users' , 'user_id', 'suivis' , 'taches'));
     }
 
     /**
@@ -153,7 +158,7 @@ class TachesController extends Controller
         $tache->etat = $request->etat;
         $tache->user_id = $request->user_id;
         $tache->save();
-        return redirect()->route('taches', $id)->with('success', 'Tache modifiée avec succès');
+        return redirect()->route('taches.create', $id)->with('success', 'Tâche modifiée avec succès');
     }
 
     public function updateEtat(Request $request, $id, $tache_id)
@@ -171,14 +176,14 @@ class TachesController extends Controller
             {
                 $tache->etat = 1;
                 $tache->save();
-                return redirect()->route('taches', $id)->with('success', 'Etat de la tâche modifié avec succès');
+                return redirect()->route('taches', $id)->with('success', 'État de la tâche modifié avec succès');
             }
         }
         else
         {
             $tache->etat = 1;
             $tache->save();
-            return redirect()->route('taches', $id)->with('success', 'Etat de la tâche modifié avec succès');
+            return redirect()->route('taches', $id)->with('success', 'État de la tâche modifié avec succès');
         }
     }
 
@@ -203,6 +208,6 @@ class TachesController extends Controller
             $suivi->save();
         }
         $tache->delete();
-        return redirect()->route('taches', $id)->with('success', 'Tache supprimée avec succès');
+        return redirect()->route('taches.create', $id)->with('success', 'Tâche supprimée avec succès');
     }
 }
