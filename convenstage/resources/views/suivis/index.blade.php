@@ -43,7 +43,7 @@
                                                             <?php $valide = $valide + 1; ?>
                                                         @endif
                                                     @endforeach
-                                                        <progress id="etat" max="1" @if($count != 0)value="{{ $valide/$count }}" title="{{ ($valide/$count)*100 }}%" @else title="Aucune tache" @endif></progress>
+                                                    <progress id="etat" max="1" @if($count != 0)value="{{ $valide/$count }}" title="{{ ($valide/$count)*100 }}%" @else title="Aucune tache" @endif></progress>
                                                 </div>
                                                 <div class="col-md-1">
                                                     <form action="{{ route('taches.create', $suivi->id) }}" method="GET" class="d-inline">

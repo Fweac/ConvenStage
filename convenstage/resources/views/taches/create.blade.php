@@ -158,8 +158,8 @@
                         @foreach($taches as $tache)
                             <ul class="list-group">
                                 @if($tache->etat == 1)
-                                    <li class="list-group-item">
-                                        <div class="row alert alert-success">
+                                    <li class="list-group-item list-group-item-success">
+                                        <div class="row">
                                             <div class="offset-md-3 col-md-6">
                                                 {{ $tache->nom }}
                                             </div>
@@ -179,8 +179,8 @@
                                     </li>
                                 @else
                                     @if($tache->date_fin < now())
-                                        <li class="list-group-item">
-                                            <div class="row alert alert-danger">
+                                        <li class="list-group-item list-group-item-danger">
+                                            <div class="row">
                                                 <div class="col-md-3">
                                                     <form action="{{ route('taches.edit', ['id' => $id, 'tache_id' => $tache->id]) }}" method="GET" class="d-inline">
                                                         @csrf
@@ -210,7 +210,7 @@
                                         </li>
                                     @else
                                         <li class="list-group-item">
-                                            <div class="row alert">
+                                            <div class="row">
                                                 <div class="col-md-3">
                                                     <form action="{{ route('taches.edit', ['id' => $id, 'tache_id' => $tache->id]) }}" method="GET" class="d-inline">
                                                         @csrf

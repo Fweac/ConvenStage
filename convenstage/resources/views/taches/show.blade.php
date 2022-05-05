@@ -25,7 +25,7 @@
                     @endif
                 @endforeach
                 @if($tache->etat == 1)
-                    <div class="col border bg-success text-white">
+                    <div class="col border list-group-item list-group-item-success">
                         <div class="row">
                             <div class="col-md-10">
                                 <p>{{ $tache->nom }}</p>
@@ -35,7 +35,7 @@
                                     <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn-close btn-close-white" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
+                                        <button class="btn-close" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
                                     </form>
                                 @endif
                             </div>
@@ -48,7 +48,7 @@
                     </div>
                 @else
                     @if($tache->date_fin > date('Y-m-d'))
-                        <div class="col border @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role)border-warning @endif" @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
+                        <div class="col border @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role)border-primary @endif list-group-item" @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
                             <div class="row">
                                 <div class="col-md-10">
                                     <p>{{ $tache->nom }}</p>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="col border @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role)border-warning @endif bg-danger text-white" @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
+                        <div class="col border @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role)border-primary @endif list-group-item list-group-item-danger" @if(Auth::user()->id == $tache->user_id || Auth::user()->role == $user_role) style="cursor: pointer;" onclick="window.location='{{ route('taches.show', ['id' => $id, 'tache_id' => $tache->id]) }}';" @endif>
                             <div class="row">
                                 <div class="col-md-10">
                                     <p>{{ $tache->nom }}</p>
@@ -80,7 +80,7 @@
                                         <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn-close btn-close-white" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
+                                            <button class="btn-close" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
                                         </form>
                                     @endif
                                 </div>
@@ -169,7 +169,7 @@
                 <form action="{{ route('taches.validate', ['id' => $id, 'tache_id' => $tacheA->id]) }}" method="POST" class="d-inline">
                     @csrf
                     <div class="container mt-3">
-                        <div class="form-group row">
+                        <div class="form-group row mt-5">
                             <button type="submit" class="btn btn-success" title="Valider">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
                                     <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
