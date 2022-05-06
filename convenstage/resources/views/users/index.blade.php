@@ -26,6 +26,7 @@
                                         <td>
                                             <form action="#" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
                                                 <input type="radio" name="role" value="admin" checked> Admin
                                                 <input type="radio" name="role" value="eleve"> Eleve
                                                 <input type="radio" name="role" value="responsable"> Responsable
@@ -39,6 +40,7 @@
                                         <td>
                                             <form action="#" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
                                                 <input type="radio" name="role" value="admin"> Admin
                                                 <input type="radio" name="role" value="eleve" checked> Eleve
                                                 <input type="radio" name="role" value="responsable"> Responsable
@@ -52,6 +54,7 @@
                                         <td>
                                             <form action="#" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
                                                 <input type="radio" name="role" value="admin"> Admin
                                                 <input type="radio" name="role" value="eleve"> Eleve
                                                 <input type="radio" name="role" value="responsable" checked> Responsable
@@ -65,6 +68,7 @@
                                         <td>
                                             <form action="#" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
                                                 <input type="radio" name="role" value="admin"> Admin
                                                 <input type="radio" name="role" value="eleve"> Eleve
                                                 <input type="radio" name="role" value="responsable"> Responsable
@@ -78,6 +82,7 @@
                                         <td>
                                             <form action="#" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
                                                 <input type="radio" name="role" value="admin"> Admin
                                                 <input type="radio" name="role" value="eleve"> Eleve
                                                 <input type="radio" name="role" value="responsable"> Responsable
@@ -91,6 +96,7 @@
                                         <td>
                                             <form action="#" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
                                                 <input type="radio" name="role" value="admin"> Admin
                                                 <input type="radio" name="role" value="eleve"> Eleve
                                                 <input type="radio" name="role" value="responsable"> Responsable
