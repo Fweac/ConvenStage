@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Convention;
 use App\Models\Suivis;
+use App\Models\Tache;
 use Illuminate\Http\Request;
 
 class ConventionsController extends Controller
@@ -12,6 +13,7 @@ class ConventionsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('verified');
     }
 
     /**
@@ -62,6 +64,74 @@ class ConventionsController extends Controller
         $request->validate([
             'convention' => 'required',
         ]);
+
+        $tache = Tache::find($tache_id);
+        $taches = Tache::where('suivis_id', $id)->get();
+        if($tache->ordre > 1 && $tache->ordre <= count($taches))
+        {
+            $item = $taches->where('ordre', $tache->ordre-1)->first();
+            if($item->etat == 0)
+            {
+                return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('error', 'Le fichier ne peut pas être ajouté car la tâche d\'avant n\'est pas terminé.');
+            }
+            else
+            {
+                if($request->convention->extension() == 'pdf')
+                {
+                    $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
+                    if($convention != null)
+                    {
+                        $ordre = Convention::where('suivis_id', $id)->count() + 1;
+                    }
+                    else
+                    {
+                        $ordre = 1;
+                    }
+
+                    $convention = new Convention();
+                    $convention->suivis_id = $id;
+                    $convention->ordre = $ordre;
+                    $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . '.' . $request->convention->extension(), 'public');
+                    $convention->save();
+
+                    return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('success', 'La convention a bien été ajoutée.');
+                }
+                else
+                {
+                    return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('error', 'Le fichier n\'est pas un PDF.');
+                }
+            }
+        }
+        else
+        {
+            if($request->convention->extension() == 'pdf')
+            {
+                $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
+                if($convention != null)
+                {
+                    $ordre = Convention::where('suivis_id', $id)->count() + 1;
+                }
+                else
+                {
+                    $ordre = 1;
+                }
+
+                $convention = new Convention();
+                $convention->suivis_id = $id;
+                $convention->ordre = $ordre;
+                $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . '.' . $request->convention->extension(), 'public');
+                $convention->save();
+
+                return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('success', 'La convention a bien été ajoutée.');
+            }
+            else
+            {
+                return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('error', 'Le fichier n\'est pas un PDF.');
+            }
+        }
+
+
+
 
         if($request->convention->extension() == 'pdf')
         {

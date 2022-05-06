@@ -15,6 +15,7 @@ class TachesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('verified');
     }
 
     /**
@@ -209,5 +210,24 @@ class TachesController extends Controller
         }
         $tache->delete();
         return redirect()->route('taches.create', $id)->with('success', 'Tâche supprimée avec succès');
+    }
+
+
+    public function destroyBis($id, $tache_id)
+    {
+        if(Gate::allows('isEleve'))
+        {
+            return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour supprimer une tâche');
+        }
+        $tache = Tache::find($tache_id);
+        $suivis = Tache::where('suivis_id', $id)->get();
+        $suivis = $suivis->where('ordre', '>', $tache->ordre);
+        foreach ($suivis as $suivi)
+        {
+            $suivi->ordre = $suivi->ordre - 1;
+            $suivi->save();
+        }
+        $tache->delete();
+        return redirect()->route('taches', $id)->with('success', 'Tâche supprimée avec succès');
     }
 }

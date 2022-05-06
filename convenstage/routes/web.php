@@ -40,6 +40,7 @@ Route::get('/suivis/{id}/taches', [TachesController::class, 'index'])->name('tac
 Route::get('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'show'])->name('taches.show');
 Route::get('/suivis/{id}/taches-create', [TachesController::class, 'create'])->name('taches.create');
 Route::post('/suivis/{id}/taches', [TachesController::class, 'store'])->name('taches.store');
+Route::delete('/suivis/{id}/taches/{tache_id}-destroy', [TachesController::class, 'destroyBis'])->name('taches.destroyBis');
 Route::delete('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'destroy'])->name('taches.destroy');
 Route::post('/suivis/{id}/taches/{tache_id}', [TachesController::class, 'updateEtat'])->name('taches.validate');
 Route::get('/suivis/{id}/taches/{tache_id}/edit', [TachesController::class, 'edit'])->name('taches.edit');

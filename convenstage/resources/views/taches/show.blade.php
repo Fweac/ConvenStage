@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-2 text-right">
                                 @if(!(Auth::user()->role == 'eleve'))
-                                    <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('taches.destroyBis', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn-close" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>{{ $tache->date_fin }}</p>
+                                <p>{{ date('d/m/Y',strtotime($tache->date_fin)) }}</p>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="col-md-2 text-right">
                                     @if(!(Auth::user()->role == 'eleve'))
-                                        <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('taches.destroyBis', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn-close" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>{{ $tache->date_fin }}</p>
+                                    <p>{{ date('d/m/Y',strtotime($tache->date_fin)) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-md-2 text-right">
                                     @if(!(Auth::user()->role == 'eleve'))
-                                        <form action="{{ route('taches.destroy', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('taches.destroyBis', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn-close" width="30%" aria-label="Close" type="submit" title="Supprimer"></button>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>{{ $tache->date_fin }}</p>
+                                    <p>{{ date('d/m/Y',strtotime($tache->date_fin)) }}</p>
                                 </div>
                             </div>
                         </div>
