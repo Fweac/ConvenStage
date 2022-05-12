@@ -6,6 +6,7 @@ use App\Models\Convention;
 use App\Models\Suivis;
 use App\Models\Tache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ConventionsController extends Controller
 {
@@ -23,6 +24,9 @@ class ConventionsController extends Controller
      */
     public function index($id)
     {
+        if(!(Gate::allows('isEleve'))){
+            abort(403, 'Accès refusé');
+        }
         $conventions = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->get();
         if(!($conventions->isEmpty()))
         {
@@ -201,6 +205,10 @@ class ConventionsController extends Controller
      */
     public function destroy($id)
     {
+        if(!(Gate::allows('isEleve')))
+        {
+            abort(403, 'Vous n\'avez pas accès à cette page.');
+        }
         $convention = Convention::find($id);
         $suivi = $convention->suivis_id;
         $conv = Convention::where('suivis_id', $suivi)->get();
