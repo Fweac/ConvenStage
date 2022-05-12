@@ -7,7 +7,7 @@
                     <div class="card-header">
                         <h5>{{ __('Élève') }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body overflow-scroll" style="max-height: 550px;">
                         <ul class="list-group">
                             @foreach($users as $user)
                                 @if($user->role == 'eleve')

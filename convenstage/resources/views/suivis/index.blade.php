@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-3">
             <div class="col-md-10">
                 @if(session('success'))
                     <div class="alert alert-success">
@@ -19,11 +19,11 @@
                 @endif
             </div>
             <div class="col-md-10">
-                <div class="card mt-3 mb-5">
+                <div class="card">
                     <div class="card-header">
                         <h4>{{ __('Gestion de suivis') }}</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="max-height: 550px; overflow-y: scroll">
                         <div class="row justify-content-center mb-3">
                             <div class="col-md-11">
                                 @foreach($suivis as $suivi)

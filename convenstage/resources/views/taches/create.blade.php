@@ -21,7 +21,7 @@
                     <div class="card-header">
                         <h5>{{ __('Élève') }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body overflow-scroll" style="max-height: 550px;">
                         <ul class="list-group">
                             @foreach($users as $user)
                                 @if($user->role == 'eleve')
@@ -144,6 +144,11 @@
                         </form>
                     </div>
                 </div>
+                <div class="container">
+                    <div class="row">
+                        <a class="btn btn-outline-secondary" href="{{ route('conventions', $id) }}">Afficher toutes les conventions</a>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3">
                 <div class="card">
@@ -154,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body overflow-scroll" style="max-height: 550px;">
                         @foreach($taches as $tache)
                             <ul class="list-group">
                                 @if($tache->etat == 1)

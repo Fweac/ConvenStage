@@ -83,14 +83,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         if(!Gate::allows('isAdmin')){
             abort(403,"Accès non autorisé");
         }
-        $user = User::findOrFail($id);
+        $user = User::find($request->id);
         $user->update($request->all());
-        return redirect()->route('users')->with('success', 'Utilisateur mis à jour');
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Utilisateur modifié avec succès',
+            ]
+        );
     }
 
     /**

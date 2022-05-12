@@ -23,14 +23,14 @@ class ConventionsController extends Controller
      */
     public function index($id)
     {
-        $convention = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->first();
-        if($convention != null)
+        $conventions = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->get();
+        if(!($conventions->isEmpty()))
         {
-            return view('conventions.index', compact('convention'));
+            return view('conventions.index', compact('conventions', 'id'));
         }
         else
         {
-            return redirect()->route('suivis')->with('error', 'Aucune convention n\'a été trouvée pour ce suivi.');
+            return redirect()->route('taches.create', $id)->with('error', 'Aucune convention n\'a été trouvée pour ce suivi.');
         }
     }
 
@@ -201,6 +201,18 @@ class ConventionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $convention = Convention::find($id);
+        $suivi = $convention->suivis_id;
+        $conv = Convention::where('suivis_id', $suivi)->get();
+        foreach($conv as $c)
+        {
+            if($c->ordre > $convention->ordre)
+            {
+                $c->ordre--;
+                $c->save();
+            }
+        }
+        $convention->delete();
+        return redirect()->route('conventions', $suivi)->with('success', 'La convention a bien été supprimée.');
     }
 }

@@ -26,7 +26,7 @@ Route::view('/profile', 'profile')->middleware('auth', 'verified')->name('home')
 // Route pour gérer les utilisateurs
 Route::get('/users', [UsersController::class, 'index'])->name('users');
 Route::get('/users/{user_id}', [UsersController::class, 'show'])->name('users.show');
-Route::post('/users/{user_id}', [UsersController::class, 'update'])->name('users.update');
+Route::post('/users', [UsersController::class, 'update'])->name('users.update');
 
 // Route pour les suivis
 Route::get('/suivis', [SuivisController::class, 'index'])->name('suivis');
@@ -50,6 +50,7 @@ Route::put('/suivis/{id}/taches/{tache_id}-e', [TachesController::class, 'update
 Route::get('/suivis/{id}/conventions', [ConventionsController::class, 'index'])->name('conventions');
 Route::get('/suivis/{id}/conventions-create', [ConventionsController::class, 'create'])->name('conventions.create');
 Route::post('/suivis/{id}/taches/{tache_id}/upload', [ConventionsController::class, 'store'])->name('conventions.store');
+Route::delete('/suivis/{id}/conventions', [ConventionsController::class, 'destroy'])->name('conventions.destroy');
 
 // Route pour les mails
 Route::post('/suivis/{id}/taches-mails', [MailController::class, 'sendMail'])->name('mails.send');
