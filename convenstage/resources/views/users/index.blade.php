@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="alert alert-success row justify-content-center" hidden id="alert" role="alert">
                         </div>
                     </div>

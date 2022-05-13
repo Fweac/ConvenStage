@@ -6,6 +6,7 @@ use App\Models\Convention;
 use App\Models\Suivis;
 use App\Models\Tache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 
 class ConventionsController extends Controller
@@ -24,7 +25,7 @@ class ConventionsController extends Controller
      */
     public function index($id)
     {
-        if(!(Gate::allows('isEleve'))){
+        if(Gate::allows('isEleve')){
             abort(403, 'Accès refusé');
         }
         $conventions = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->get();
@@ -95,7 +96,7 @@ class ConventionsController extends Controller
                     $convention = new Convention();
                     $convention->suivis_id = $id;
                     $convention->ordre = $ordre;
-                    $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . '.' . $request->convention->extension(), 'public');
+                    $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . time() . '.' . $request->convention->extension(), 'public');
                     $convention->save();
 
                     return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('success', 'La convention a bien été ajoutée.');
@@ -123,7 +124,7 @@ class ConventionsController extends Controller
                 $convention = new Convention();
                 $convention->suivis_id = $id;
                 $convention->ordre = $ordre;
-                $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . '.' . $request->convention->extension(), 'public');
+                $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . time() . '.' . $request->convention->extension(), 'public');
                 $convention->save();
 
                 return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('success', 'La convention a bien été ajoutée.');
@@ -152,7 +153,7 @@ class ConventionsController extends Controller
             $convention = new Convention();
             $convention->suivis_id = $id;
             $convention->ordre = $ordre;
-            $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . '.' . $request->convention->extension(), 'public');
+            $convention->path = $request->convention->storeAs('conventions', $id . '_' . $ordre . time() . '.' . $request->convention->extension(), 'public');
             $convention->save();
 
             return redirect()->route('taches.show', ['id' => $id, 'tache_id' => $tache_id])->with('success', 'La convention a bien été ajoutée.');
@@ -205,7 +206,7 @@ class ConventionsController extends Controller
      */
     public function destroy($id)
     {
-        if(!(Gate::allows('isEleve')))
+        if(Gate::allows('isEleve'))
         {
             abort(403, 'Vous n\'avez pas accès à cette page.');
         }
@@ -220,6 +221,7 @@ class ConventionsController extends Controller
                 $c->save();
             }
         }
+        File::delete('storage/' . $convention->path);
         $convention->delete();
         return redirect()->route('conventions', $suivi)->with('success', 'La convention a bien été supprimée.');
     }
