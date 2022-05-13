@@ -23,7 +23,7 @@ class UsersController extends Controller
     public function index()
     {
         if(!Gate::allows('isAdmin')){
-            abort(403,"Accès non autorisé");
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $users = User::all();
         return view('users.index', compact('users'));
@@ -59,7 +59,7 @@ class UsersController extends Controller
     public function show($id)
     {
         if(!Gate::allows('isAdmin')){
-            abort(403,"Accès non autorisé");
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $user = User::findOrFail($id);
         return view('users.show', compact('user'));
@@ -86,7 +86,7 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         if(!Gate::allows('isAdmin')){
-            abort(403,"Accès non autorisé");
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $user = User::find($request->id);
         $user->update($request->all());

@@ -5167,6 +5167,13 @@ document.addEventListener('DOMContentLoaded', function () {
   } finally {
     _iterator.f();
   }
+
+  $(document).ready(function () {
+    $('#search-user').keyup(function () {
+      var search = $(this).val();
+      console.log(search);
+    });
+  });
 });
 
 /***/ }),

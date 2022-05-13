@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 Route::view('/profile', 'profile')->middleware('auth', 'verified')->name('home');
 
 // Route pour gérer les utilisateurs

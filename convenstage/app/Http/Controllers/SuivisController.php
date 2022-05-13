@@ -23,7 +23,7 @@ class SuivisController extends Controller
     public function index()
     {
         if(Gate::allows('isEleve')){
-            abort(403,"Accès non autorisé");
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $suivis = Suivis::all();
         $users = User::all();
@@ -41,7 +41,7 @@ class SuivisController extends Controller
     public function store(Request $request)
     {
         if(Gate::allows('isEleve')){
-            abort(403,"Accès non autorisé");
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $tests = Suivis::all();
         foreach($tests as $test)
@@ -83,7 +83,7 @@ class SuivisController extends Controller
     public function destroy($id)
     {
         if(Gate::allows('isEleve')){
-            abort(403,"Accès non autorisé");
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $suivis = Suivis::find($id);
         $taches = Tache::all();

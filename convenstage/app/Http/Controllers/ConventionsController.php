@@ -26,7 +26,7 @@ class ConventionsController extends Controller
     public function index($id)
     {
         if(Gate::allows('isEleve')){
-            abort(403, 'Accès refusé');
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $conventions = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->get();
         if(!($conventions->isEmpty()))
@@ -208,7 +208,7 @@ class ConventionsController extends Controller
     {
         if(Gate::allows('isEleve'))
         {
-            abort(403, 'Vous n\'avez pas accès à cette page.');
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $convention = Convention::find($id);
         $suivi = $convention->suivis_id;

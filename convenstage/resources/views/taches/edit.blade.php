@@ -22,6 +22,9 @@
                         <h5>{{ __('Élève') }}</h5>
                     </div>
                     <div class="card-body overflow-scroll" style="max-height: 550px;">
+                        <form class="form-group mb-2">
+                            <input type="text" name="search" id="search-user" class="form-control" value="" placeholder="Recherche d'utilisateur">
+                        </form>
                         <ul class="list-group">
                             @foreach($users as $user)
                                 @if($user->role == 'eleve')

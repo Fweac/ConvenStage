@@ -2,6 +2,16 @@
 @section('content')
 <div class="container">
         <div class="row justify-content-center mt-5">
+            @if(session('success'))
+                <div class="alert alert-success text-center">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger text-center">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="col-md-2 mt-3 mb-3">
                 <img src="{{ asset('storage/Bootstrap_logo.png') }}" width="100%">
             </div>

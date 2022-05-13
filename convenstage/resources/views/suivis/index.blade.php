@@ -25,15 +25,18 @@
                     </div>
                     <div class="card-body" style="max-height: 550px; overflow-y: scroll">
                         <div class="row justify-content-center mb-3">
-                            <div class="col-md-11">
+                            <div class="col-md-12">
+                                <form class="form-group">
+                                    <input type="text" name="search" id="search-user" class="form-control" value="" placeholder="Recherche d'utilisateur">
+                                </form>
                                 @foreach($suivis as $suivi)
                                     <div class="card mt-3">
                                         <div class="card-body" style="cursor: pointer;" onclick="window.location='{{ route('suivis.show', $suivi->user_id) }}';">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-5">
                                                     {{ $users->find($suivi->user_id)->name }}
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-5">
                                                     <?php
                                                     $count = $taches->where('suivis_id', $suivi->id)->count();
                                                     $valide = 0;

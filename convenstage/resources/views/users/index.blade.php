@@ -14,6 +14,9 @@
                         <h5>{{ __('Utilisateurs') }}</h5>
                     </div>
                     <div class="card-body overflow-scroll" style="max-height: 550px;">
+                        <form class="form-group">
+                            <input type="text" name="search" id="search-user" class="form-control" value="" placeholder="Recherche d'utilisateur">
+                        </form>
                         <table class="table table-striped">
                             <thead>
                             <tr>

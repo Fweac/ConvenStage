@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+    $(document).ready(function(){
+        $('#search-user').keyup(function(){
+            var search = $(this).val();
+            console.log(search);
+        });
+    });
+
 });
 
 
