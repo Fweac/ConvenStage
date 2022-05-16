@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'email_verified_at' => now(),
         ]);
-        User::factory(10)->create();
+        User::factory(1000)->create();
     }
 }

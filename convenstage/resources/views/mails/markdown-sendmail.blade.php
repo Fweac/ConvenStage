@@ -5,7 +5,7 @@
     Pensez à la valider au plus vite !
     Vous pouvez cliquer sur le lien suivant pour valider votre tâche :
 
-@component('mail::button', ['url' => url('/suivis/'.$data['tache']->suivis_id.'/conventions-create')])
+@component('mail::button', ['url' => url('/suivis/'.$data['tache']->suivis_id.'/taches')])
     Valider ma tâche
 @endcomponent
 
