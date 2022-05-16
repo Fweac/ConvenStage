@@ -27,6 +27,8 @@ Route::view('/profile', 'profile')->middleware('auth', 'verified')->name('home')
 Route::get('/users', [UsersController::class, 'index'])->name('users');
 Route::get('/users/{user_id}', [UsersController::class, 'show'])->name('users.show');
 Route::post('/users', [UsersController::class, 'update'])->name('users.update');
+Route::get('/users-search', [UsersController::class, 'search'])->name('users.search');
+Route::get('/users-eleve-search', [UsersController::class, 'eleveSearch'])->name('users.eleveSearch');
 
 // Route pour les suivis
 Route::get('/suivis', [SuivisController::class, 'index'])->name('suivis');
@@ -34,6 +36,7 @@ Route::get('/suivis/{id}', [SuivisController::class, 'show'])->name('suivis.show
 Route::get('suivis-create', [SuivisController::class, 'create'])->name('suivis.create');
 Route::post('/suivis', [SuivisController::class, 'store'])->name('suivis.store');
 Route::delete('/suivis/{id}', [SuivisController::class, 'destroy'])->name('suivis.destroy');
+Route::get('/suivis-search', [SuivisController::class, 'search'])->name('suivis.search');
 
 // Route pour les taches
 Route::get('/suivis/{id}/taches', [TachesController::class, 'index'])->name('taches');

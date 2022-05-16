@@ -108,4 +108,16 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $users = User::where('name', 'like', '%'.$request->user.'%')->get();
+        return view('users.search', compact('users'));
+    }
+
+    public function eleveSearch(Request $request)
+    {
+        $users = User::where('name', 'like', '%'.$request->user.'%')->where('role', '=', 'eleve')->get();
+        return view('users.search', compact('users'));
+    }
 }

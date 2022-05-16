@@ -21,11 +21,89 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    $(document).ready(function(){
-        $('#search-user').keyup(function(){
-            var search = $(this).val();
-            console.log(search);
-        });
+
+    $('#search-user').keyup(function(){
+        $('#search-result').html('');
+
+        var user = $(this).val();
+
+        if(user != '')
+        {
+            $.ajax({
+                url: '/users-search',
+                method: 'GET',
+                data: {
+                    user: encodeURIComponent(user)
+                },
+                success: function(data)
+                {
+                    if(data != '')
+                    {
+                        document.getElementById('search-result').innerHTML = data;
+                    }
+                    else
+                    {
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item">Pas de résultat</li>';
+                    }
+                }
+            });
+        }
+    });
+
+    $('#search-suivis').keyup(function(){
+        $('#search-result').html('');
+
+        var user = $(this).val();
+
+        if(user != '')
+        {
+            $.ajax({
+                url: '/suivis-search',
+                method: 'GET',
+                data: {
+                    user: encodeURIComponent(user)
+                },
+                success: function(data)
+                {
+                    if(data != '')
+                    {
+                        document.getElementById('search-result').innerHTML = data;
+                    }
+                    else
+                    {
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item">Pas de résultat</li>';
+                    }
+                }
+            });
+        }
+    });
+
+    $('#search-eleve').keyup(function(){
+        $('#search-result').html('');
+
+        var user = $(this).val();
+
+        if(user != '')
+        {
+            $.ajax({
+                url: '/users-eleve-search',
+                method: 'GET',
+                data: {
+                    user: encodeURIComponent(user)
+                },
+                success: function(data)
+                {
+                    if(data != '')
+                    {
+                        document.getElementById('search-result').innerHTML = data;
+                    }
+                    else
+                    {
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item">Pas de résultat</li>';
+                    }
+                }
+            });
+        }
     });
 
 });

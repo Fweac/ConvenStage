@@ -106,4 +106,25 @@ class SuivisController extends Controller
         $suivis->delete();
         return redirect()->route('suivis')->with('success', 'Suivi supprimé');
     }
+
+    public function search(Request $request)
+    {
+        $userList = User::all();
+        $users = User::where('name', 'like', '%'.$request->user.'%')->get();
+        foreach ($users as $user)
+        {
+            if(Suivis::where('user_id', $user->id)->get()->count() > 0)
+            {
+                $suivis[] = Suivis::where('user_id', $user->id)->get()[0];
+            }
+        }
+        if(isset($suivis))
+        {
+            return view('suivis.search', compact('suivis', 'userList'));
+        }
+        else
+        {
+            return view('suivis.search', compact('userList'));
+        }
+    }
 }

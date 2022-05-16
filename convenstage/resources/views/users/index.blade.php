@@ -17,6 +17,7 @@
                         <form class="form-group">
                             <input type="text" name="search" id="search-user" class="form-control" value="" placeholder="Recherche d'utilisateur">
                         </form>
+                        <div id="search-result"></div>
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -28,7 +29,7 @@
                             <tbody>
                             @foreach($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
+                                    <td id="{{ $user->name }}">{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     @switch($user->role)
                                         @case("admin")

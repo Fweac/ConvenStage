@@ -22,13 +22,14 @@
                         <h5>{{ __('Élève') }}</h5>
                     </div>
                     <div class="card-body overflow-scroll" style="max-height: 550px;">
-                        <form class="form-group mb-2">
-                            <input type="text" name="search" id="search-user" class="form-control" value="" placeholder="Recherche d'utilisateur">
+                        <form class="form-group">
+                            <input type="text" name="search" id="search-eleve" class="form-control" value="" placeholder="Recherche d'utilisateur">
                         </form>
-                        <ul class="list-group">
+                        <div id="search-result"></div>
+                        <ul class="list-group mt-2">
                             @foreach($users as $user)
                                 @if($user->role == 'eleve')
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" id="{{ $user->name }}">
                                         <div class="row">
                                             <div class="col-md-9">
                                                 {{ $user->name }}

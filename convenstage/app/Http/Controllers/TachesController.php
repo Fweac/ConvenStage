@@ -6,8 +6,10 @@ use App\Models\Suivis;
 use App\Models\Convention;
 use App\Models\Tache;
 use App\Models\User;
+use App\Mail\SendMailValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class TachesController extends Controller
 {
@@ -177,6 +179,11 @@ class TachesController extends Controller
             {
                 $tache->etat = 1;
                 $tache->save();
+                if(($futurT = $taches->where('ordre', $tache->ordre+1)->first()) != null)
+                {
+                    $destinataire = User::find($futurT->user_id);
+                    Mail::to($destinataire->email)->send(new SendMailValidate($destinataire, $futurT));
+                }
                 return redirect()->route('taches', $id)->with('success', 'État de la tâche modifié avec succès');
             }
         }
@@ -184,6 +191,11 @@ class TachesController extends Controller
         {
             $tache->etat = 1;
             $tache->save();
+            if(($futurT = $taches->where('ordre', $tache->ordre+1)->first()) != null)
+            {
+                $destinataire = User::find($futurT->user_id);
+                Mail::to($destinataire->email)->send(new SendMailValidate($destinataire, $futurT));
+            }
             return redirect()->route('taches', $id)->with('success', 'État de la tâche modifié avec succès');
         }
     }

@@ -27,8 +27,9 @@
                         <div class="row justify-content-center mb-3">
                             <div class="col-md-12">
                                 <form class="form-group">
-                                    <input type="text" name="search" id="search-user" class="form-control" value="" placeholder="Recherche d'utilisateur">
+                                    <input type="text" name="search" id="search-suivis" class="form-control" value="" placeholder="Recherche d'utilisateur">
                                 </form>
+                                <div id="search-result"></div>
                                 @foreach($suivis as $suivi)
                                     <div class="card mt-3">
                                         <div class="card-body" style="cursor: pointer;" onclick="window.location='{{ route('suivis.show', $suivi->user_id) }}';">
