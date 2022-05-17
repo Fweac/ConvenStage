@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConventionsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SuivisController;
 use App\Http\Controllers\TachesController;
@@ -21,7 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-Route::view('/profile', 'profile')->middleware('auth', 'verified')->name('home');
+Route::view('/profil', 'profil')->middleware('auth', 'verified')->name('home');
+
+// Route pour la redirection en fonction de la connexion ou inscription
+Route::get('/redirect', [HomeController::class, 'index'])->name('redirect');
 
 // Route pour gérer les utilisateurs
 Route::get('/users', [UsersController::class, 'index'])->name('users');
