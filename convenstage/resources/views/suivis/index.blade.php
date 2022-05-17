@@ -18,7 +18,7 @@
                     </div>
                 @endif
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">
                         <h4>{{ __('Gestion de suivis') }}</h4>
