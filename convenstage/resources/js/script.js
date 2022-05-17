@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     else
                     {
-                        document.getElementById('search-result').innerHTML = '<li class="list-group-item">Pas de résultat</li>';
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item text-secondary">Pas de résultat</li>';
                     }
                 }
             });
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     else
                     {
-                        document.getElementById('search-result').innerHTML = '<li class="list-group-item">Pas de résultat</li>';
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item text-secondary">Pas de résultat</li>';
                     }
                 }
             });
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     else
                     {
-                        document.getElementById('search-result').innerHTML = '<li class="list-group-item">Pas de résultat</li>';
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item text-secondary">Pas de résultat</li>';
                     }
                 }
             });
