@@ -31,7 +31,7 @@
                                 <p>{{ $tache->nom }}</p>
                             </div>
                             <div class="col-md-2 text-right">
-                                @if(!(Auth::user()->role == 'eleve'))
+                                @if(!(Auth::user()->role == 'eleve' || Auth::user()->role == 'secretaire' || Auth::user()->role == 'tuteur'))
                                     <form action="{{ route('taches.destroyBis', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
@@ -54,7 +54,7 @@
                                     <p>{{ $tache->nom }}</p>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    @if(!(Auth::user()->role == 'eleve'))
+                                    @if(!(Auth::user()->role == 'eleve' || Auth::user()->role == 'secretaire' || Auth::user()->role == 'tuteur'))
                                         <form action="{{ route('taches.destroyBis', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
@@ -76,7 +76,7 @@
                                     <p>{{ $tache->nom }}</p>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    @if(!(Auth::user()->role == 'eleve'))
+                                    @if(!(Auth::user()->role == 'eleve' || Auth::user()->role == 'secretaire' || Auth::user()->role == 'tuteur'))
                                         <form action="{{ route('taches.destroyBis', ['id' => $id, 'tache_id' => $tache->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')

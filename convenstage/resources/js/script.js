@@ -106,6 +106,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    $('#search-suivis-tuteur').keyup(function(){
+        $('#search-result').html('');
+
+        var user = $(this).val();
+
+        if(user != '')
+        {
+            $.ajax({
+                url: '/suivis-tuteur-search',
+                method: 'GET',
+                data: {
+                    user: encodeURIComponent(user)
+                },
+                success: function(data)
+                {
+                    if(data != '')
+                    {
+                        document.getElementById('search-result').innerHTML = data;
+                    }
+                    else
+                    {
+                        document.getElementById('search-result').innerHTML = '<li class="list-group-item text-secondary">Pas de résultat</li>';
+                    }
+                }
+            });
+        }
+    });
+
 });
 
 

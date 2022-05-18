@@ -59,10 +59,14 @@
                             <a class="nav-link" href="{{ route('users') }}">{{ __('Admin') }}</a>
                         </li>
                     @endif
-                    @if(!(Auth::user()->role == 'eleve'))
+                    @if(!(Auth::user()->role == 'eleve' || Auth::user()->role == 'secretaire' || Auth::user()->role == 'tuteur'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('suivis.create') }}">{{ __('Générer Suivis') }}</a>
                         </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="{{ route('suivis') }}">{{ __('Gestion de suivis') }}</a>
+                        </li>
+                    @elseif(Auth::user()->role == 'secretaire' || Auth::user()->role == 'tuteur')
                         <li  class="nav-item">
                             <a class="nav-link" href="{{ route('suivis') }}">{{ __('Gestion de suivis') }}</a>
                         </li>

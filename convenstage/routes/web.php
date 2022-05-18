@@ -41,6 +41,7 @@ Route::get('suivis-create', [SuivisController::class, 'create'])->name('suivis.c
 Route::post('/suivis', [SuivisController::class, 'store'])->name('suivis.store');
 Route::delete('/suivis/{id}', [SuivisController::class, 'destroy'])->name('suivis.destroy');
 Route::get('/suivis-search', [SuivisController::class, 'search'])->name('suivis.search');
+Route::get('/suivis-tuteur-search', [SuivisController::class, 'tuteurSearch'])->name('suivis.tuteurSearch');
 
 // Route pour les taches
 Route::get('/suivis/{id}/taches', [TachesController::class, 'index'])->name('taches');

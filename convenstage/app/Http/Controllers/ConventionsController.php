@@ -25,7 +25,7 @@ class ConventionsController extends Controller
      */
     public function index($id)
     {
-        if(Gate::allows('isEleve')){
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur')){
             return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $conventions = Convention::where('suivis_id', $id)->orderBy('ordre', 'desc')->get();
@@ -206,7 +206,7 @@ class ConventionsController extends Controller
      */
     public function destroy($id)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecrataire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }

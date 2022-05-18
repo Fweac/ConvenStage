@@ -47,7 +47,7 @@ class TachesController extends Controller
      */
     public function create($id)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour créer une tâche');
         }
@@ -69,7 +69,7 @@ class TachesController extends Controller
      */
     public function store(Request $request)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('taches', $request->suivis_id)->with('error', 'Vous n\'avez pas les droits pour créer une tâche');
         }
@@ -121,7 +121,7 @@ class TachesController extends Controller
      */
     public function edit($id, $tache_id)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour modifier une tâche');
         }
@@ -143,7 +143,7 @@ class TachesController extends Controller
      */
     public function update(Request $request, $id , $tache_id)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour modifier une tâche');
         }
@@ -208,7 +208,7 @@ class TachesController extends Controller
      */
     public function destroy($id, $tache_id)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour supprimer une tâche');
         }
@@ -227,7 +227,7 @@ class TachesController extends Controller
 
     public function destroyBis($id, $tache_id)
     {
-        if(Gate::allows('isEleve'))
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur'))
         {
             return redirect()->route('taches', $id)->with('error', 'Vous n\'avez pas les droits pour supprimer une tâche');
         }

@@ -7,6 +7,7 @@ use App\Models\Suivis;
 use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -33,6 +34,9 @@ class SuivisController extends Controller
 
     public function create()
     {
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur')){
+            return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
+        }
         $users = User::all();
         $suivis = Suivis::all();
         return view('suivis.create', compact('users' , 'suivis'));
@@ -40,7 +44,7 @@ class SuivisController extends Controller
 
     public function store(Request $request)
     {
-        if(Gate::allows('isEleve')){
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur')){
             return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $tests = Suivis::all();
@@ -82,7 +86,7 @@ class SuivisController extends Controller
 
     public function destroy($id)
     {
-        if(Gate::allows('isEleve')){
+        if(Gate::allows('isEleve') || Gate::allows('isSecretaire') || Gate::allows('isTuteur')){
             return redirect()->route('welcome')->with('error', 'Vous n\'avez pas accès à cette page');
         }
         $suivis = Suivis::find($id);
@@ -125,6 +129,28 @@ class SuivisController extends Controller
         else
         {
             return view('suivis.search', compact('userList'));
+        }
+    }
+
+    public function tuteurSearch(Request $request)
+    {
+        $userList = User::all();
+        $tacheList = Tache::all();
+        $users = User::where('name', 'like', '%'.$request->user.'%')->get();
+        foreach ($users as $user)
+        {
+            if(Suivis::where('user_id', $user->id)->get()->count() > 0)
+            {
+                $suivis[] = Suivis::where('user_id', $user->id)->get()[0];
+            }
+        }
+        if(isset($suivis))
+        {
+            return view('suivis.Search', compact('suivis', 'userList', 'tacheList'));
+        }
+        else
+        {
+            return view('suivis.Search', compact('userList', 'tacheList'));
         }
     }
 }
