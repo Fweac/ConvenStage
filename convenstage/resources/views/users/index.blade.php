@@ -31,6 +31,9 @@
                                 <tr>
                                     <td id="{{ $user->name }}">{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    @if($user->id == 1)
+                                        <td>{{ __('Administrateur') }}</td>
+                                    @else
                                     @switch($user->role)
                                         @case("admin")
                                         <td>
@@ -110,6 +113,7 @@
                                             </form>
                                         </td>
                                     @endswitch
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
